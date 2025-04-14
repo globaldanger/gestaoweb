@@ -2,26 +2,62 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel de Gestão</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel - SuperGest</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
 </head>
-<body class="bg-gray-100 p-6">
-  <h1 class="text-2xl font-bold mb-4">Cadastro de Cliente e Mercadoria</h1>
-  <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
-    <input id="nome" placeholder="Nome do Cliente" class="p-2 border rounded" />
-    <input id="email" placeholder="Email do Cliente" class="p-2 border rounded" />
-    <input id="telefone" placeholder="Telefone" class="p-2 border rounded" />
-    <input id="endereco" placeholder="Endereço" class="p-2 border rounded" />
-    <input id="mercadoria" placeholder="Nome da Mercadoria" class="p-2 border rounded" />
-    <input id="valor" placeholder="Valor da Mercadoria" class="p-2 border rounded" />
+<body class="bg-gray-100 min-h-screen p-4">
+  <div class="max-w-4xl mx-auto bg-white shadow-md p-6 rounded-xl">
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold">📋 Cadastro de Cliente & Mercadoria</h1>
+      <button onclick="logout()" class="text-sm text-red-500 hover:underline">Sair</button>
+    </div>
+
+    <form id="formCadastro" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="col-span-full"><h2 class="font-semibold text-lg">Dados do Cliente</h2></div>
+
+      <input id="nome" type="text" placeholder="Nome Completo" class="p-2 border rounded" required />
+      <input id="email" type="email" placeholder="E-mail" class="p-2 border rounded" />
+      <input id="telefone" type="text" placeholder="Telefone" class="p-2 border rounded" />
+      <input id="endereco" type="text" placeholder="Endereço" class="p-2 border rounded" />
+
+      <div class="col-span-full"><h2 class="font-semibold text-lg mt-4">Dados da Mercadoria</h2></div>
+
+      <input id="mercadoria" type="text" placeholder="Nome da Mercadoria" class="p-2 border rounded" required />
+      <input id="valor" type="number" step="0.01" placeholder="Valor (R$)" class="p-2 border rounded" required />
+
+      <div class="flex items-center gap-2">
+        <input type="checkbox" id="pago" />
+        <label for="pago">Cliente já pagou?</label>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <input type="checkbox" id="parcelado" />
+        <label for="parcelado">Parcelado?</label>
+      </div>
+
+      <select id="formaPagamento" class="p-2 border rounded" required>
+        <option value="">Forma de Pagamento</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="PIX">PIX</option>
+        <option value="Cartão">Cartão</option>
+      </select>
+
+      <button type="submit" class="col-span-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        Salvar Ficha
+      </button>
+    </form>
+
+    <hr class="my-6"/>
+
+    <h2 class="text-xl font-bold mb-2">📁 Fichas Salvas</h2>
+    <div id="fichas" class="space-y-4"></div>
   </div>
-  <button id="salvarBtn" class="mt-4 bg-green-500 text-white p-2 rounded">Salvar</button>
 
-  <h2 class="text-xl font-bold mt-6">Clientes Cadastrados</h2>
-  <div id="listaClientes" class="mt-4 space-y-2"></div>
-
-  <script src="firebase-config.js"></script>
-  <script src="app.js"></script>
+  <script src="/js/dashboard.js"></script>
 </body>
 </html>

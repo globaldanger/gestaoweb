@@ -3,19 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Sistema de Gestão</title>
+  <title>Login - SuperGest</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="/js/firebase-config.js"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-4 text-center">Sistema de Gestão</h2>
-    <input id="email" type="email" placeholder="Email" class="w-full mb-2 p-2 border rounded" />
-    <input id="senha" type="password" placeholder="Senha" class="w-full mb-4 p-2 border rounded" />
-    <button id="loginBtn" class="w-full bg-blue-500 text-white p-2 rounded mb-2">Entrar</button>
-    <button id="cadastroBtn" class="w-full bg-green-500 text-white p-2 rounded">Criar Conta</button>
-    <p id="mensagem" class="text-center text-red-500 mt-2"></p>
+  <div class="bg-white shadow-xl rounded-xl p-8 w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">SuperGest - Acesso</h1>
+
+    <!-- Alternador -->
+    <div class="flex justify-center mb-4 space-x-4">
+      <button id="btnLogin" class="font-semibold text-blue-600 underline">Entrar</button>
+      <button id="btnRegister" class="font-semibold text-gray-500 hover:text-blue-600">Criar Conta</button>
+    </div>
+
+    <!-- Formulário de Login -->
+    <form id="loginForm" class="space-y-4">
+      <input type="email" id="loginEmail" placeholder="Seu e-mail" class="w-full p-2 border rounded-md" required />
+      <input type="password" id="loginPassword" placeholder="Senha" class="w-full p-2 border rounded-md" required />
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">Entrar</button>
+    </form>
+
+    <!-- Formulário de Registro -->
+    <form id="registerForm" class="space-y-4 hidden">
+      <input type="email" id="registerEmail" placeholder="Seu e-mail" class="w-full p-2 border rounded-md" required />
+      <input type="password" id="registerPassword" placeholder="Senha" class="w-full p-2 border rounded-md" required />
+      <button type="submit" class="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">Criar Conta</button>
+    </form>
+
+    <p id="message" class="text-center text-red-500 mt-4"></p>
   </div>
-  <script src="firebase-config.js"></script>
-  <script src="app.js"></script>
+
+  <script src="/js/auth.js"></script>
 </body>
 </html>
